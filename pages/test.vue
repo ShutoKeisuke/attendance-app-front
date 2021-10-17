@@ -10,6 +10,39 @@
                 {{ test }}
             </v-col>
         </v-row>
+        <v-row>
+            <v-col>
+                <v-time-picker></v-time-picker>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col>
+              <!-- カード内にフローティングアクションボタンを配置します。 -->
+              <v-card>
+                <v-card-title>タイトル</v-card-title>
+                <!-- テキストを表示するためのv-card-text -->
+                <v-card-text style="height: 200px;">本文</v-card-text>
+                <!-- フローティングアクションボタンを配置するためのv-card-text -->
+                <v-card-text style="height: 50px; position: relative">
+                  <!--
+                    フローティングアクションボタンを定義します。
+                    fab:丸いボタンにします。
+                    absolute/top/right:コンポーネントの指定位置に表示します。
+                  -->
+                  <v-btn
+                    fab
+                    absolute
+                    top
+                    right
+                    color="primary"
+                  >
+                    <!-- プラスのアイコンにします。 -->
+                    <v-icon>mdi-plus</v-icon>
+                  </v-btn>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
     </v-layout>
 </template>
 

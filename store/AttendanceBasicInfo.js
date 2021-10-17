@@ -50,5 +50,22 @@ export const actions = {
             commit('faildGetAttendance')
             console.log(`error AttendanceBasicInfo/setAttendanceBasicInfoByUserId : ${error}`)
         })
+    },
+    async postAttendanceSubmitInfo({}, payload) {
+        console.log('postAttendanceSubmitInfo payload')
+        console.log(payload)
+        await api.post('/attendance/edit', payload, {
+            headers: {
+              'content-type': 'application/json',
+            }
+        })
+        .then(response => {
+            console.log('SUCCESS : postAttendanceSubmitInfo')
+            console.log(response)
+        })
+        .catch(error => {
+            console.log('FAILD : postAttendanceSubmitInfo')
+            console.log(error)
+        })
     }
 }

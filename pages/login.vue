@@ -40,6 +40,8 @@ export default {
             }
         }
     },
+    created: function() {
+    },
     methods: {
         updateUserInfo() {
             this.$store.commit('LoginInfo/updateUserInfo', this.loginInfo)

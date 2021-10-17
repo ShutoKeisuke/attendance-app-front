@@ -7,6 +7,7 @@ export const state = () => ({
 export const mutations = {
     initEvents(state, payload) {
         state.events = []
+        console.log(payload)
         state.events = payload
     },
     setEvents(state, payload) {
@@ -55,7 +56,8 @@ export const actions = {
                         name: item.workStyle,
                         start: new Date(`${rootState.AttendanceBasicInfo.attendanceBasicInfo.year}-${adjustAddZeroHead(rootState.AttendanceBasicInfo.attendanceBasicInfo.month)}-${adjustAddZeroHead(index + 1)}T${item.startTime}`),
                         color: 'indigo',
-                        timed: true
+                        timed: true,
+                        category: 'startTimeIsNotNull'
                         }
                     } 
                     if(item.endTime !== null) {
@@ -66,6 +68,7 @@ export const actions = {
                         name: item.workStyle,
                         start: new Date(`${rootState.AttendanceBasicInfo.attendanceBasicInfo.year}-${adjustAddZeroHead(rootState.AttendanceBasicInfo.attendanceBasicInfo.month)}-${adjustAddZeroHead(index + 1)}T00:00:00`),
                         color: 'indigo',
+                        category: 'startTimeIsNull'
                         }
                     }
                 // workStyle === 休日
@@ -108,6 +111,32 @@ export const actions = {
                         name: item.workStyle,
                         start: new Date(`${rootState.AttendanceBasicInfo.attendanceBasicInfo.year}-${adjustAddZeroHead(rootState.AttendanceBasicInfo.attendanceBasicInfo.month)}-${adjustAddZeroHead(index + 1)}T00:00:00`),
                         color: 'pink',
+                        timed: true
+                    }
+                } else if(item.workStyle === "振替") {
+                    if(item.startTime != null) {
+                        events[index*2] = {
+                            name: item.workStyle,
+                            start: new Date(`${rootState.AttendanceBasicInfo.attendanceBasicInfo.year}-${adjustAddZeroHead(rootState.AttendanceBasicInfo.attendanceBasicInfo.month)}-${adjustAddZeroHead(index + 1)}T${item.startTime}`),
+                            color: 'light-green',
+                            timed: true,
+                            category: "振出"
+                        }
+                    } else {
+                        events[index*2] = {
+                            name: item.workStyle,
+                            start: new Date(`${rootState.AttendanceBasicInfo.attendanceBasicInfo.year}-${adjustAddZeroHead(rootState.AttendanceBasicInfo.attendanceBasicInfo.month)}-${adjustAddZeroHead(index + 1)}T00:00:00`),
+                            color: 'light-green',
+                            timed: true,
+                            category: "振休"
+                        }
+                    }
+                    
+                } else if(item.workStyle === "欠勤") {
+                    events[index*2] = {
+                        name: item.workStyle,
+                        start: new Date(`${rootState.AttendanceBasicInfo.attendanceBasicInfo.year}-${adjustAddZeroHead(rootState.AttendanceBasicInfo.attendanceBasicInfo.month)}-${adjustAddZeroHead(index + 1)}T00:00:00`),
+                        color: 'red',
                         timed: true
                     }
                 }
